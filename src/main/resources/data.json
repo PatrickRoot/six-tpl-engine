@@ -1,0 +1,30 @@
+{
+  "list": [
+    {
+      "name": "guokai",
+      "show": true
+    },
+    {
+      "name": "benben",
+      "show": false
+    },
+    {
+      "name": "dierbaby",
+      "show": true
+    }
+  ],
+  "blah": [
+    {"num": 1},
+    {"num": 2},
+    {
+      "num": 3,
+      "inner": [
+        {"time": "15:10"},
+        {"time": "16:20"},
+        {"time": "17:30"},
+        {"time": "18:40"}
+      ]
+    },
+    {"num": 4}
+  ]
+}
