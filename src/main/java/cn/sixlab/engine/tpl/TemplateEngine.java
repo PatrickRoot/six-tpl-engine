@@ -5,17 +5,19 @@
  */
 package cn.sixlab.engine.tpl;
 
+import com.sun.istack.internal.Nullable;
+
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * TODO
@@ -25,66 +27,77 @@ import java.util.List;
  */
 public class TemplateEngine {
 
-    public static void main(String[] args) throws ScriptException, IOException {
+    /**
+     * 从指定的tpl模板文件和json数据的文件生成文本文件，保存到指定路径，并返回生成的文本文件的字符串。
+     *
+     * @param tplFileName 模板文件路径
+     * @param dataFileName json数据文件路径
+     * @param resultFilePath 保存结果的文本文件的路径
+     * @return 从模板和数据生成的文本字符串
+     */
+    public static String generateFromFiles(String tplFileName, String dataFileName, String resultFilePath)
+            throws IOException, ScriptException {
+        String tpl = readTextFile(new FileInputStream(tplFileName));
+        String json = readTextFile(new FileInputStream(dataFileName));
+        String result = generateFromString(tpl, json);
+
+        File file = new File(resultFilePath);
+        if(!file.exists() || !file.isFile()){
+            file.createNewFile();
+        }
+        FileWriter writer = new FileWriter(file);
+        writer.write(result);
+        writer.flush();
+        writer.close();
+        return result;
+    }
+
+    /**
+     * 传入字符串数组和json格式字符串，生成文本字符串并返回。
+     *
+     * @param tpl 模板字符串。
+     * @param json json格式的字符串。
+     * @return 生成的文本文件。
+     */
+    public static String generateFromString(@Nullable String tpl,@Nullable String json)
+            throws IOException, ScriptException {
+        InputStream is = TemplateEngine.class.getResourceAsStream("/juicer-min.js");
+        String juicer = readTextFile(is);
+
+        tpl = tpl.replaceAll("'","\'");
+        tpl = tpl.replaceAll("\n","','");
+
+        StringBuffer sb = new StringBuffer();
+
+        sb.append(" var tplArray = ['");
+        sb.append(tpl);
+        sb.append("']; \n ");
+
+        sb.append(" var tpl = tplArray.join('\\n'); \n ");
+        sb.append(" var data= " + json + " ; \n ");
+        sb.append(juicer+" \n ");
+        sb.append(" juicer(tpl,data); ");
 
         ScriptEngineManager manager = new ScriptEngineManager();
         ScriptEngine engine = manager.getEngineByName("nashorn");
 
-        StringBuilder js = new StringBuilder();
-
-        String[] juicerArray = readJsFile("juicer-min.js");
-        String[] tplArray = readJsFile("tpl.txt");
-        String[] dataArray = readJsFile("data.json");
-
-        StringBuilder invokeJuicer = new StringBuilder();
-        invokeJuicer.append(" var data = ");
-        for (String data : dataArray) {
-            invokeJuicer.append(data + "\n");
-        }
-        invokeJuicer.append("; \n ");
-
-        invokeJuicer.append("var tplArray = [");
-        int length = tplArray.length;
-        int temp = 0;
-        for (String tpl : tplArray) {
-            invokeJuicer.append("'" + tpl + "'");
-            if (++temp < length) {
-                invokeJuicer.append(",");
-            }
-        }
-        invokeJuicer.append(" ]; \n ");
-
-        invokeJuicer.append(" var tpl = tplArray.join('\\n'); ");
-        invokeJuicer.append(";print(tpl);\n\n");
-        System.out.println(invokeJuicer.toString());
-
-        invokeJuicer.append(" juicer(tpl, data) \n ");
-
-        for (String juicer : juicerArray) {
-            js.append(juicer + "\n");
-        }
-        js.append(invokeJuicer);
-
-        String text = (String) engine.eval(js.toString());
-        FileWriter writer = new FileWriter("result.txt");
-        writer.write(text);
-        writer.flush();
-        writer.close();
+        return (String) engine.eval(sb.toString());
     }
 
-    private static String[] readJsFile(String fileName) throws IOException {
-        InputStream is = TemplateEngine.class.getResourceAsStream("/" + fileName);
+    private static String readTextFile(InputStream is) throws IOException {
         Reader isReader = new InputStreamReader(is);
         BufferedReader reader = new BufferedReader(isReader);
 
-        List<String> jsFiles = new ArrayList<>();
+        StringBuffer sb = new StringBuffer();
 
-        String jsFile;
-        while ((jsFile = reader.readLine()) != null) {
-            jsFiles.add(jsFile);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line+"\n");
         }
-
-        return jsFiles.toArray(new String[]{});
+        if(sb.length()>0){
+            return sb.substring(0, sb.length()-1);
+        }
+        return "";
     }
 
 }
