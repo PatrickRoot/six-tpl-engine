@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?language  javascript?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<SplitPane fx:controller="cn.sixlab.engine.tpl.EngineController" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <items>
+      <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
+         <items>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button onAction="resetTpl" mnemonicParsing="false" text="重置" />
+                        <Button onAction="#chooseTpl" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="1" />
+                     </children>
+                  </GridPane>
+               </bottom>
+               <center>
+                  <TextArea fx:id="tplText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <BorderPane prefHeight="200.0" prefWidth="200.0">
+               <bottom>
+                  <GridPane BorderPane.alignment="CENTER">
+                     <children>
+                        <Button onAction="resetData" mnemonicParsing="false" text="重置" />
+                        <Button onAction="#chooseData" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="1" />
+                     </children>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                  </GridPane>
+               </bottom>
+               <center>
+                  <TextArea id="dataText" fx:id="dataText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+         </items>
+      </SplitPane>
+      <BorderPane prefHeight="200.0" prefWidth="200.0">
+         <bottom>
+            <GridPane BorderPane.alignment="CENTER">
+               <children>
+                  <Button onAction="resetResult" mnemonicParsing="false" text="清空结果" />
+                  <Button onAction="#saveFile" mnemonicParsing="false" text="保存到文件" GridPane.columnIndex="1" />
+               </children>
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+            </GridPane>
+         </bottom>
+         <center>
+            <TextArea fx:id="resultText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </items>
+
+    <fx:script>
+        function resetTpl() {
+            tplText.text = "";
+        }
+
+        function resetData() {
+            dataText.text = "";
+        }
+
+        function resetResult() {
+            resultText.text = "";
+        }
+         </fx:script>
+</SplitPane>
