@@ -11,6 +11,15 @@
     <name>SixTemplateEngine</name>
     <url>http://maven.apache.org</url>
 
+    <dependencies>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.9.6</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>

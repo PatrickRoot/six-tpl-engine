@@ -20,7 +20,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 
 /**
- * TODO
+ * 通过Juicer模板和Json数据生成文本
  *
  * @author 六楼的雨/loki
  * @date 2015/7/27 13:51
@@ -84,6 +84,13 @@ public class TemplateEngine {
         return (String) engine.eval(sb.toString());
     }
 
+    /**
+     *  从文本文件读取字符串
+     *
+     * @param is 文件的输入流
+     * @return 返回的字符串
+     * @throws IOException 文件读取错误
+     */
     private static String readTextFile(InputStream is) throws IOException {
         Reader isReader = new InputStreamReader(is);
         BufferedReader reader = new BufferedReader(isReader);
