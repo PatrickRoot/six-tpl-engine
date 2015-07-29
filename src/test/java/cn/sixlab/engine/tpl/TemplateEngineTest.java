@@ -8,7 +8,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 
 public class TemplateEngineTest {
 
@@ -147,11 +146,9 @@ public class TemplateEngineTest {
 
     @Test
     public void testReadTextFile() throws Exception {
-        Method method = TemplateEngine.class.getDeclaredMethod("readTextFile", InputStream.class);
-        method.setAccessible(true);
 
         InputStream is = TemplateEngine.class.getResourceAsStream("/juicer-min.js");
-        System.out.println(method.invoke(new TemplateEngine(), is));
+        System.out.println(TemplateEngine.readTextFile(is));
         System.out.println("-----------------");
 
         File file = new File(testFileName);
@@ -165,7 +162,7 @@ public class TemplateEngineTest {
         writer.flush();
         writer.close();
         is = new FileInputStream(file);
-        System.out.println(method.invoke(new TemplateEngine(), is));
+        System.out.println(TemplateEngine.readTextFile(is));
         System.out.println("-----------------");
 
         text = " has \n sth \n end ";
@@ -174,7 +171,7 @@ public class TemplateEngineTest {
         writer.flush();
         writer.close();
         is = new FileInputStream(file);
-        System.out.println(method.invoke(new TemplateEngine(), is));
+        System.out.println(TemplateEngine.readTextFile(is));
         System.out.println("-----------------");
 
         file.delete();

@@ -33,7 +33,7 @@ public class Engine extends Application {
         } catch (IOException e1) {
             System.out.println(e1.getMessage());
         }
-        Scene scene = new Scene(parent, 795, 498);
+        Scene scene = new Scene(parent, 800, 500);
         primaryStage.setScene(scene);
         primaryStage.setTitle("文本生成器");
         primaryStage.show();

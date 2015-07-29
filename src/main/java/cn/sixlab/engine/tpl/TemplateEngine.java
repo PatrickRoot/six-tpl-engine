@@ -91,7 +91,7 @@ public class TemplateEngine {
      * @return 返回的字符串
      * @throws IOException 文件读取错误
      */
-    private static String readTextFile(InputStream is) throws IOException {
+    protected static String readTextFile(InputStream is) throws IOException {
         Reader isReader = new InputStreamReader(is);
         BufferedReader reader = new BufferedReader(isReader);
 

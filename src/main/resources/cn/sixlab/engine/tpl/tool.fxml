@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?language  javascript?>
 
+<?language javascript?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<SplitPane fx:controller="cn.sixlab.engine.tpl.EngineController" dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" orientation="VERTICAL" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cn.sixlab.engine.tpl.EngineController">
    <items>
       <SplitPane dividerPositions="0.5" prefHeight="200.0" prefWidth="200.0">
          <items>
@@ -13,30 +13,34 @@
                <bottom>
                   <GridPane BorderPane.alignment="CENTER">
                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Button onAction="resetTpl" mnemonicParsing="false" text="重置" />
-                        <Button onAction="#chooseTpl" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#resetTpl" text="重置" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#chooseTpl" text="选择文件" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                      </children>
                   </GridPane>
                </bottom>
                <center>
-                  <TextArea fx:id="tplText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <TextArea fx:id="tplText" prefHeight="200.0" prefWidth="200.0" promptText="模板，也可以从文件读取" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
             <BorderPane prefHeight="200.0" prefWidth="200.0">
                <bottom>
                   <GridPane BorderPane.alignment="CENTER">
                      <children>
-                        <Button onAction="resetData" mnemonicParsing="false" text="重置" />
-                        <Button onAction="#chooseData" mnemonicParsing="false" text="选择文件" GridPane.columnIndex="1" />
+                        <Button mnemonicParsing="false" onAction="#resetData" text="重置" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <Button mnemonicParsing="false" onAction="#chooseData" text="选择文件" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                      </children>
                      <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                      </columnConstraints>
@@ -46,7 +50,7 @@
                   </GridPane>
                </bottom>
                <center>
-                  <TextArea id="dataText" fx:id="dataText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                  <TextArea id="dataText" fx:id="dataText" prefHeight="200.0" prefWidth="200.0" promptText="json数据，也可以从文件读取" BorderPane.alignment="CENTER" />
                </center>
             </BorderPane>
          </items>
@@ -55,10 +59,12 @@
          <bottom>
             <GridPane BorderPane.alignment="CENTER">
                <children>
-                  <Button onAction="resetResult" mnemonicParsing="false" text="清空结果" />
-                  <Button onAction="#saveFile" mnemonicParsing="false" text="保存到文件" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#resetResult" text="清空结果" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#saveFile" text="保存到文件" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
                <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                </columnConstraints>
@@ -68,22 +74,21 @@
             </GridPane>
          </bottom>
          <center>
-            <TextArea fx:id="resultText" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+            <TextArea fx:id="resultText" prefHeight="200.0" prefWidth="200.0" promptText="生成的文本，可修改后再保存" BorderPane.alignment="CENTER" />
          </center>
+         <top>
+            <GridPane prefHeight="30.0" BorderPane.alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#genText" text="生成文本" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+               </children>
+            </GridPane>
+         </top>
       </BorderPane>
    </items>
-
-    <fx:script>
-        function resetTpl() {
-            tplText.text = "";
-        }
-
-        function resetData() {
-            dataText.text = "";
-        }
-
-        function resetResult() {
-            resultText.text = "";
-        }
-         </fx:script>
 </SplitPane>

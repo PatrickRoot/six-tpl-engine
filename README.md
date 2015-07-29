@@ -1,29 +1,31 @@
 #SixTemplateEngine
 
-    竟然被推荐了，好开心
+    竟然被 git@osc 推荐了，好开心
     
 初步设想是使用Juicer和Java中的js引擎来生成文本。
 
 只要定义好Juicer支持的模板再加上Json格式的数据，就能生成文本。
 
-原来挺简单的，目前已经完成，不知道有没有什么问题。
+使用JavaFx套了一个GUI界面，可以界面化操作。
 
 ###已完成：
 1. 使用Java和Juicer开发，从模板和json数据生成文本。
 2. 重构代码，现在有两个方法可以调用。一种是从String生成String，第二种是从文件生成文件。
+3. 使用JavaFx编写界面，可以使用界面方式运行。
 
-###使用方法：
-1. 使用String生成String。
+###GUI的使用方法：
+1. 下载[SixTemplateEngineBin.jar][jar]，运行。
+
+###库的使用方法：
+1. 下载[SixTemplateEngine.jar][jar]，引用。
+1. 使用String生成String，调用`generateFromString`方法。
 ```
     String generateFromString(String tpl,String json)
-
     tpl - 模板字符串。
-    
     json - json格式的字符串。
-    
     返回值 - 生成的字符串。
 ```
-2. 从文件生成文件。
+2. 从文件生成文件，调用`generateFromString`方法。
 ```
     String generateFromString(String tplFileName, String dataFileName, String resultFilePath)
     tplFileName - 模板文件路径
@@ -33,8 +35,12 @@
 ```
 
 ###以后的计划：
-1. 添加main方法，打成jar包可以启动。
-2. 做个带界面的，初步想着用JavaFx，如果以后nw.js会用了，可能改为nw.js完全不用Java代码。
+1. 分成两个maven module，库那一部分单独一个module，其他人可以引用，GUI界面的一部分一个module，调用库。
+2. 看看maven 中央仓库能不能上传这个东西。
+
+
+###可能的计划:
+1. 如果以后nw.js会用了，可能改为nw.js完全不用Java代码。
 
 ###其他：
 1. 项目使用了GPL v3授权协议。
@@ -43,3 +49,4 @@
 
 [Juicer]: http://juicer.name/  "Juicer 官方网站"
 [JuicerDoc]: http://juicer.name/docs/docs_zh_cn.html  "Juicer 中文文档"
+[jar]: http://git.oschina.net/nianqinianyi/SixTemplateEngine/attach_files  "jar 包下载"
