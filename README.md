@@ -21,16 +21,23 @@
 1. 使用String生成String，调用`generateFromString`方法。
 ```
     String generateFromString(String tpl,String json)
+    
     tpl - 模板字符串。
+    
     json - json格式的字符串。
+    
     返回值 - 生成的字符串。
 ```
 2. 从文件生成文件，调用`generateFromString`方法。
 ```
     String generateFromString(String tplFileName, String dataFileName, String resultFilePath)
+    
     tplFileName - 模板文件路径
+    
     dataFileName - json数据文件路径
+    
     resultFilePath - 保存结果的文本文件的路径
+    
     返回值 - 生成的字符串。
 ```
 
