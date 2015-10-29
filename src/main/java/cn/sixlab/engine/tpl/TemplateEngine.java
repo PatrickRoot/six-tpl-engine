@@ -1,11 +1,4 @@
-/**
- * @Copyright © Sixlab 2015
- * @author 六楼的雨/loki
- * @email <nianqinianyi@163.com>
- */
 package cn.sixlab.engine.tpl;
-
-import com.sun.istack.internal.Nullable;
 
 import javax.script.ScriptEngine;
 import javax.script.ScriptEngineManager;
@@ -23,7 +16,6 @@ import java.io.Reader;
  * 通过Juicer模板和Json数据生成文本
  *
  * @author 六楼的雨/loki
- * @date 2015/7/27 13:51
  */
 public class TemplateEngine {
 
@@ -34,6 +26,8 @@ public class TemplateEngine {
      * @param dataFileName json数据文件路径
      * @param resultFilePath 保存结果的文本文件的路径
      * @return 从模板和数据生成的文本字符串
+     * @throws IOException  文件读取错误
+     * @throws ScriptException  Js代码错误
      */
     public static String generateFromFiles(String tplFileName, String dataFileName, String resultFilePath)
             throws IOException, ScriptException {
@@ -58,8 +52,10 @@ public class TemplateEngine {
      * @param tpl 模板字符串。
      * @param json json格式的字符串。
      * @return 生成的文本文件。
+     * @throws IOException  文件读取错误
+     * @throws ScriptException  Js代码错误
      */
-    public static String generateFromString(@Nullable String tpl,@Nullable String json)
+    public static String generateFromString(String tpl,String json)
             throws IOException, ScriptException {
         InputStream is = TemplateEngine.class.getResourceAsStream("/juicer-min.js");
         String juicer = readTextFile(is);
