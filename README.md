@@ -52,6 +52,7 @@
 ###其他：
 1. 项目使用了GPL v3授权协议。
 1. 项目使用了开源项目[Juicer][Juicer]，Juicer使用了Apache授权协议。感谢Juicer。
+
 >Juicer 是一个高效、轻量的前端 (Javascript) 模板引擎，使用 Juicer 可以是你的代码实现数据和视图模型的分离(MVC)。 除此之外，它还可以在 Node.js 环境中运行。
 
 [Juicer]: http://juicer.name/  "Juicer 官方网站"
